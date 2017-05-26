@@ -1,0 +1,21 @@
+Name start !Command for starting the macro
+!This would be the place to insert a loop of some kind to loop through the sequence
+!Define Local Variables
+Local cols,runtime,signal,i,j
+
+!How many objects are there in the Working Register
+for j=1 to RegSize(Chromreg) !Loop through all Objects in the Register Chromreg
+cols=DataCols (Chromreg[j])
+Open "C:\temp\" + "Signal"+Val$(j)+".csv" For Output as #5 !Defining Output File
+Print "Saving C:\temp\" + " Signal" + Val$(j) + ".csv" !Just writing that it works
+
+For i=1 To cols !Building up the .csv File
+runtime=Data (Chromreg[j],0,i)
+signal=Data (Chromreg[j],1,i)
+print#5,runtime,";",signal
+Next i
+Close#5 !Close the Output File
+next j
+!If there is a command for the next sample, this would be the place
+Print "Finished"
+endmacro
